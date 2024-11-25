@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.dicoding.butgetin.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_profileFragment"
+            app:destination="@id/profile_fragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_notificationFragment"
+            app:destination="@id/notification_fragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_articleFragment"
+            app:destination="@id/article_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_tracking"
+        android:name="com.dicoding.butgetin.ui.tracking.TrackingFragment"
+        android:label="@string/title_tracking"
+        tools:layout="@layout/fragment_tracking" />
+
+    <fragment
+        android:id="@+id/navigation_monthly_report"
+        android:name="com.dicoding.butgetin.ui.monthlyreport.MonthlyReportFragment"
+        android:label="@string/title_monthly_report"
+        tools:layout="@layout/fragment_monthly_report" />
+    <fragment
+        android:id="@+id/profile_fragment"
+        android:name="com.dicoding.butgetin.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/notification_fragment"
+        android:name="com.dicoding.butgetin.ui.notification.NotificationFragment"
+        android:label="@string/title_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/article_fragment"
+        android:name="com.dicoding.butgetin.ui.article.ArticleFragment"
+        android:label="@string/title_article"
+        tools:layout="@layout/fragment_article" />
+</navigation>
