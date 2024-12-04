@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const userModel = require('../models/userModel');
+const User = require('../models/userModel');
 const dotenv = require('dotenv');
 
 
@@ -16,13 +16,13 @@ module.exports = {
     }
 
     // Cek apakah user sudah ada
-    const existingUser = await userModel.findByEmail(email);
+    const existingUser = await User.findByEmail(email);
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
 
     // Registrasi user baru
-    const newUser = await userModel.register({ fullname, email, password });
+    const newUser = await User.register({ fullname, email, password });
     res.status(201).json({ message: "User registered", user: { id: newUser.id, fullname: newUser.fullname, email: newUser.email } });
   },
 
@@ -30,7 +30,7 @@ module.exports = {
     const { email, password } = req.body;
 
     // Cari user berdasarkan email
-    const user = await userModel.findByEmail(email);
+    const user = await User.findByEmail(email);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }

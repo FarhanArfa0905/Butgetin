@@ -8,23 +8,35 @@ const authMiddleware = require('../middleware/authMiddleware');
 router.post('/register', authController.register);
 router.post('/login', authController.login);
 
-// Rute untuk akses yang dilindungi (gunakan middleware untuk autentikasi)
+// Logout
+router.post('/logout', (req, res) => {
+  // Tidak ada tindakan server-side pada logout sederhana
+  res.json({ message: 'Logged out successfully. Token invalidated on client-side.' });
+});
+
+// Rute untuk akses yang dilindungi
 router.get('/protected', authMiddleware, (req, res) => {
   res.status(200).json({ message: 'Welcome to protected route', user: req.user });
 });
 
-// Rute untuk memulai autentikasi Google
-router.get('/auth/google', passport.authenticate('google', {
-  scope: ['profile', 'email'],
-}));
-
-router.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  (req, res) => {
-    // Respons jika autentikasi berhasil
-    res.redirect('/dashboard');  // Redirect ke halaman dashboard atau halaman lain
-  }
+// Rute untuk login dengan Google
+router.get(
+  '/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
+router.get(
+  '/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login', session: false }),
+  (req, res) => {
+    // Login berhasil
+    const token = req.user.token; // Ambil token dari Passport
+    res.json({
+      message: 'Login successful',
+      token,
+      user: req.user,
+    }); // Kirim token JWT
+  }
+);
 
 module.exports = router;
