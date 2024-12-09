@@ -3,7 +3,6 @@
 Butgetin is application expense tracker that .........
 
 Purpose-driven :
-![Custom_Me-removebg](https://github.com/user-attachments/assets/4c915b8f-f195-49fe-aebe-b0a0fca393dc)
 
 •	Users want to manage their expense and avoid doing overspending
 •	Provides budgeting recommendations for each category to individual by history transactions.
