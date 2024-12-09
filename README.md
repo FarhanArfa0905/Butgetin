@@ -24,6 +24,13 @@ Purpose-driven :
 
 # App Showcase
 
+Demonstrasi
 
+
+# Learning Paths
+
+- [Machine Learning](https://github.com/FarhanArfa0905/Butgetin/tree/Machine-Learning)
+- [Cloud Computing](https://github.com/FarhanArfa0905/Butgetin/tree/CloudComputing)
+- [Mobile Development](https://github.com/FarhanArfa0905/Butgetin/tree/MobileDevelopment)
 
 
