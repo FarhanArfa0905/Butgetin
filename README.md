@@ -23,8 +23,16 @@ o	Dropout layer with a rate of 0.2.
 o	Dense layer with 64 units, ReLU activation, and L2 regularization.  
 o	Dropout layer with a rate of 0.1.  
 •	Output Layer:
-A dense layer that outputs a single value using a linear activation function.
+A dense layer that outputs a single value using a linear activation function.  
 
+Model Summary  
+![Butgetin App](https://www.dropbox.com/scl/fi/qjyinj4ql4vux7opiq6im/ModelSummary.png?rlkey=0qu8d8bo7kgfgdfhzhzcnycca&st=x3twghbf&dl=0)  
+
+Model Plot Training  
+![Butgetin App](https://www.dropbox.com/scl/fi/s2dle1md46472j71xz4uf/PlotTraining.png?rlkey=px6v7h0dj4z0wwrsu1v58l6d5&st=kdo9e6j4&dl=0)  
+
+Model Suggest Budgeting  
+![Butgetin App](https://www.dropbox.com/scl/fi/psrewyy0jl2mk72a8kvcy/ModelSuggest.png?rlkey=5w7hg92ervaiae8fz4vd5qgf7&st=oolixzlw&dl=0)  
 
 
 ## How to use our projects
