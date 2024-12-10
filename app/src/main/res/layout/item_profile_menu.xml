@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:ignore="UseCompoundDrawables">
 
     <ImageView
         android:id="@+id/img_icon_account"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginEnd="16dp"
+        android:contentDescription="@string/image_icon"
         android:src="@drawable/ic_profile" />
 
     <TextView
@@ -18,7 +21,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Account"
+        android:text="@string/account"
         android:textSize="16sp" />
 
 </LinearLayout>

@@ -11,4 +11,17 @@
     <color name="dark_green">#4A8433</color>
     <color name="income">#4A90E2</color>
     <color name="expense">#E74C3C</color>
+    <color name="light_green">#90bf7e</color>
+    <color name="grey">#888888</color>
+    <color name="red">#880000</color>
+    <color name="light_blue">#a5c8f1</color>
+    <color name="light_red">#f3a69e</color>
+    <color name="darker_blue">#254871</color>
+    <color name="darker_red">#74261e</color>
+    <color name="darker_green">#2d501f</color>
+    <color name="dark_red">#c13f32</color>
+    <color name="dark_blue">#3e78bc</color>
+    <color name="text_color">#000000</color>
+    <color name="darker_grey">#3C3C3C</color>
+    <color name="lighter_grey">#7A7A7A</color>
 </resources>

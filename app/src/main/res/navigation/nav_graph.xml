@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.dicoding.butgetin.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_tracking"
+        android:name="com.dicoding.butgetin.ui.tracking.TrackingFragment"
+        android:label="@string/title_tracking"
+        tools:layout="@layout/fragment_tracking" >
+        <action
+            android:id="@+id/action_navigation_tracking_to_incomeTrackingFragment"
+            app:destination="@id/incomeTrackingFragment" />
+        <action
+            android:id="@+id/action_navigation_tracking_to_expenseTrackingFragment"
+            app:destination="@id/expenseTrackingFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_monthly_report"
+        android:name="com.dicoding.butgetin.ui.monthlyreport.MonthlyReportFragment"
+        android:label="@string/title_monthly_report"
+        tools:layout="@layout/fragment_monthly_report" >
+        <action
+            android:id="@+id/action_navigation_monthly_report_to_incomeMonthlyReportFragment"
+            app:destination="@id/incomeMonthlyReportFragment" />
+        <action
+            android:id="@+id/action_navigation_monthly_report_to_expenseMonthlyReportFragment"
+            app:destination="@id/expenseMonthlyReportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/incomeTrackingFragment"
+        android:name="com.dicoding.butgetin.ui.tracking.part.IncomeTrackingFragment"
+        android:label="fragment_income_tracking"
+        tools:layout="@layout/fragment_income_tracking" >
+        <action
+            android:id="@+id/action_incomeTrackingFragment_to_navigation_tracking"
+            app:destination="@id/navigation_tracking" />
+    </fragment>
+    <fragment
+        android:id="@+id/expenseTrackingFragment"
+        android:name="com.dicoding.butgetin.ui.tracking.part.ExpenseTrackingFragment"
+        android:label="fragment_expense_tracking"
+        tools:layout="@layout/fragment_expense_tracking" >
+        <action
+            android:id="@+id/action_expenseTrackingFragment_to_navigation_tracking"
+            app:destination="@id/navigation_tracking" />
+    </fragment>
+    <fragment
+        android:id="@+id/incomeMonthlyReportFragment"
+        android:name="com.dicoding.butgetin.ui.monthlyreport.part.IncomeMonthlyReportFragment"
+        android:label="fragment_income_monthly_report"
+        tools:layout="@layout/fragment_income_monthly_report" >
+        <action
+            android:id="@+id/action_incomeMonthlyReportFragment_to_navigation_monthly_report"
+            app:destination="@id/navigation_monthly_report" />
+    </fragment>
+    <fragment
+        android:id="@+id/expenseMonthlyReportFragment"
+        android:name="com.dicoding.butgetin.ui.monthlyreport.part.ExpenseMonthlyReportFragment"
+        android:label="fragment_expense_monthly_report"
+        tools:layout="@layout/fragment_expense_monthly_report" >
+        <action
+            android:id="@+id/action_expenseMonthlyReportFragment_to_navigation_monthly_report"
+            app:destination="@id/navigation_monthly_report" />
+    </fragment>
+
+</navigation>

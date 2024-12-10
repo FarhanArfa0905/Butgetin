@@ -6,8 +6,14 @@ import androidx.lifecycle.ViewModel
 
 class MonthlyReportViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is Monthly Report Fragment"
+    private val _transactions = MutableLiveData<List<String>>()
+    val transactions: LiveData<List<String>> get() = _transactions
+
+    init {
+        _transactions.value = emptyList()
     }
-    val text: LiveData<String> = _text
+
+    fun updateTransactions(newTransactions: List<String>) {
+        _transactions.value = newTransactions
+    }
 }
