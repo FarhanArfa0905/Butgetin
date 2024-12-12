@@ -1,4 +1,4 @@
-## <img src="https://raw.githubusercontent.com/FarhanArfa0905/Butgetin/115ed12cca367f71c6dc17463265f91c50395c35/Group%2072.png" alt="Gambar" width="100">   Butgetin
+## <img src="https://raw.githubusercontent.com/FarhanArfa0905/Butgetin/115ed12cca367f71c6dc17463265f91c50395c35/Group%2072.png" alt="Gambar" width="50">   Butgetin
 
 Butgetin is a capstone project aimed at helping families, especially children and teenagers, manage their finances effectively by fostering financial literacy and building good budgeting habits. This project integrates machine learning, cloud computing, and mobile development to deliver a budgeting app with real-time notifications, spending breakdowns, and parental oversight.
 
