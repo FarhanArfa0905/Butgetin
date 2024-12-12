@@ -29,7 +29,7 @@ The app fosters financial literacy in children and teens through educational con
 
 The cloud architecture for Butgetin is designed to ensure scalability, security, and efficient resource management. Below is an overview of the architecture:
 
-<img src="https://github.com/FarhanArfa0905/Butgetin/blob/CloudComputing/WhatsApp%20Image%202024-12-12%20at%2012.49.20.jpeg?raw=true" alt="Cloud Architecture" width="500">
+<img src="https://github.com/FarhanArfa0905/Butgetin/blob/CloudComputing/WhatsApp%20Image%202024-12-12%20at%2012.49.20.jpeg?raw=true" alt="Cloud Architecture" width="1000">
 
 ### Key Components:
 
