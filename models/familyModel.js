@@ -18,10 +18,6 @@ Family.init(
       type: DataTypes.INTEGER,
       allowNull: true, // Menandakan kolom ini boleh bernilai null
     },
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
   },
   {
     sequelize,

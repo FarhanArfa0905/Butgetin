@@ -2,7 +2,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const { findByEmail, register, User } = require('../models/userModel'); // Mengimpor register dan metode lainnya
+const User = require('../models/userModel'); // Mengimpor register dan metode lainnya
 dotenv.config();
 
 passport.use(
@@ -15,11 +15,11 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        let user = await findByEmail(profile.emails[0].value);
+        let user = await User.findByEmail(profile.emails[0].value);
 
         if (!user) {
           // Jika user belum ada, buat user baru
-          user = await register({
+          user = await User.register({
             email: profile.emails[0].value,
             googleId: profile.id,
             fullname: profile.displayName,
@@ -49,7 +49,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await findById(id); // Ambil pengguna berdasarkan ID
+    const user = await User.findById(id); // Ambil pengguna berdasarkan ID
     done(null, user); // Kirimkan objek pengguna setelah ditemukan
   } catch (error) {
     console.error('Error during deserialization:', error);

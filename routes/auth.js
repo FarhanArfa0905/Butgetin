@@ -9,10 +9,7 @@ router.post('/register', authController.register);
 router.post('/login', authController.login);
 
 // Logout
-router.post('/logout', (req, res) => {
-  // Tidak ada tindakan server-side pada logout sederhana
-  res.json({ message: 'Logged out successfully. Token invalidated on client-side.' });
-});
+router.post('/logout', authController.logout);
 
 // Rute untuk akses yang dilindungi
 router.get('/protected', authMiddleware, (req, res) => {

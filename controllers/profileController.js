@@ -8,8 +8,11 @@ const getProfile = async (req, res) => {
   try {
     const userId = req.user.id; // Ambil userId dari token/auth middleware
 
-    // Menggunakan Sequelize untuk menemukan user berdasarkan ID
-    const user = await User.findByPk(userId);
+    // Cari pengguna dan informasi keluarga yang terhubung
+    const user = await User.findByPk(userId, {
+      include: [{ model: Family, as: 'family' }],
+    });
+
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -18,8 +21,8 @@ const getProfile = async (req, res) => {
     // Hapus password dari objek user
     const { password, ...userData } = user.toJSON();
 
-    // Kirim data pengguna tanpa password
-    res.status(200).json(userData);
+    // Kirimkan data pengguna beserta keluarga yang terhubung
+    res.status(200).json({ ...userData, family: user.family || null });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error', error });
@@ -61,7 +64,40 @@ const updateProfile = async (req, res) => {
   }
 };
 
+// Handler untuk menghapus profil pengguna
+const deleteProfile = async (req, res) => {
+  try {
+    const userId = req.user.id; // Ambil userId dari token/auth middleware
+
+    // Cari user berdasarkan ID
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Hapus data keluarga terkait jika perlu (jika ada relasi)
+    if (user.familyId) {
+      const family = await Family.findByPk(user.familyId);
+      if (family) {
+        await family.destroy(); // Hapus keluarga jika diperlukan
+      }
+    }
+
+    // Hapus data pengguna
+    await user.destroy();
+
+    // Kirimkan response bahwa profil berhasil dihapus
+    res.status(200).json({ message: 'Profile deleted successfully' });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
+
 module.exports = {
   getProfile,
   updateProfile,
+  deleteProfile, // Pastikan fungsi deleteProfile diekspor
 };

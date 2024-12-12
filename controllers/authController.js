@@ -47,6 +47,24 @@ module.exports = {
     res.status(200).json({ message: "Logged in", token });
   },
 
+  async logout(req, res) {
+    // Token yang diterima dari header authorization (Bearer Token)
+    const token = req.headers['authorization']?.split(' ')[1];
+
+    if (!token) {
+      return res.status(400).json({ message: 'No token provided' });
+    }
+    // Jika menggunakan blacklist, Anda bisa menambahkan token ke blacklist di server
+    // Misalnya, menggunakan Redis untuk menyimpan token yang tidak valid
+    // blacklistToken(token);  // Fungsi ini akan menandai token tidak valid
+
+    // Di sisi klien, Anda harus menghapus token (misalnya, menghapus token dari cookie atau localStorage)
+    res.clearCookie('token');  // Jika menggunakan cookie untuk menyimpan token
+    // localStorage.removeItem('token'); // Jika menggunakan localStorage (di sisi klien)
+
+    return res.status(200).json({ message: 'Logged out successfully. Token invalidated.' });
+  },
+
   async googleLogin(req, res) {
     try {
       // Pastikan req.user tidak kosong

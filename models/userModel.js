@@ -5,6 +5,9 @@ const bcrypt = require('bcrypt');
 class User extends Model {
   static async findByEmail(email) {
     return await User.findOne({ where: { email } });
+  } catch (error) {
+    console.error('Error in findByEmail:', error.message);
+    return null; // Pastikan tidak memunculkan error meskipun tidak ada email
   }
 
   static async findById(id) {
@@ -26,6 +29,7 @@ class User extends Model {
     const existingUser = await this.findByEmail(email);
     if (existingUser) {
       throw new Error('Email already in use');
+      
     }
 
     const newUser = await User.create({
@@ -34,6 +38,7 @@ class User extends Model {
       password: hashedPassword,
       googleId,
     });
+    
 
     return newUser;
   }

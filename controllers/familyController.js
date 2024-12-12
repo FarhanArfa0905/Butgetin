@@ -45,7 +45,7 @@ exports.getAllFamilies = async (req, res) => {
     const families = await Family.findAll({
       include: {
         model: User,
-        as: 'user',
+        as: 'members',
         attributes: ['id', 'fullname', 'email']  // Menyertakan informasi User terkait
       }
     });
@@ -64,7 +64,7 @@ exports.getFamilyByUser = async (req, res) => {
     const user = await User.findByPk(userId, {
       include: {
         model: Family,
-        as: 'families', // Mengambil data keluarga dari relasi
+        as: 'family', // Mengambil data keluarga dari relasi
         attributes: ['id', 'name', 'relation', 'age'],
       }
     });
@@ -75,15 +75,15 @@ exports.getFamilyByUser = async (req, res) => {
     }
 
     // Cek apakah data keluarga ditemukan
-    console.log('User families:', user.families);
+    console.log('User family:', user.family);
 
     // Pastikan families bukan array kosong
-    if (user.families && user.families.length > 0) {
-      return res.status(200).json(user.families);
+    if (user.families && user.family.length > 0) {
+      return res.status(200).json(user.family);
     }
 
     // Mengembalikan data keluarga
-    res.status(200).json(user.families);
+    res.status(200).json(user.family);
   } catch (error) {
     // Menangani error server
     console.error(error);

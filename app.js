@@ -1,11 +1,16 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const syncDatabase = require('./utils/syncDatabase');
 const passport = require('./config/passport');
 const session = require('express-session');
+const redis = require('redis');
 const profileRoutes = require('./routes/profileRoutes');
 const authRoutes = require('./routes/auth');
 const familyRoutes = require('./routes/familyRoutes');
 const budgetRoutes = require('./routes/budgetRoutes');
+const notificationRoutes = require('./routes/notificationRoutes')
+const transactionRoutes = require('./routes/transactionRoutes');
+const recommendationRoutes = require('./routes/recommendationRoutes');
 const authMiddleware = require('./middleware/authMiddleware');
 const dotenv = require('dotenv');
 require('./models/associationsModel');
@@ -15,6 +20,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware express-session
+app.use(bodyParser.json());
 app.use(
   session({
     secret: 'your_secret_key', // Ganti dengan string rahasia Anda
@@ -34,6 +40,9 @@ app.use('/auth', authRoutes);
 app.use('/api', profileRoutes);
 app.use('/api/family', familyRoutes);
 app.use('/api', budgetRoutes);
+app.use('/api', transactionRoutes);
+app.use('/api', notificationRoutes);
+app.use('/api', recommendationRoutes);
 
 app.get('/protected', authMiddleware, (req, res) => {
   res.status(200).json({ message: 'Welcome to protected route', user: req.user });

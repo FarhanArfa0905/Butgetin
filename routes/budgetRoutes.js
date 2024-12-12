@@ -1,10 +1,18 @@
 const express = require('express');
-const { addBudget, getBudgets, getBudgetsByUser } = require('../controllers/budgetController');
-
 const router = express.Router();
+const { addBudget, getBudgets, updateBudget, deleteBudget, getBudgetsByUser } = require('../controllers/budgetController');
 
-router.post('/budgets', addBudget); // Tambah anggaran
-router.get('/budgets', getBudgets); // Dapatkan semua anggaran
-router.get('/budgets/:userId', getBudgetsByUser); // Dapatkan anggaran berdasarkan pengguna
+// Menambahkan anggaran
+router.post('/budget', addBudget);
+
+// Melihat anggaran
+router.get('/budget', getBudgets);
+
+// Mengedit anggaran
+router.put('/budget/:id', updateBudget);
+
+// Menghapus anggaran
+router.delete('/budget/:id', deleteBudget);
+router.get('/budget/:userId', getBudgetsByUser); // Dapatkan anggaran berdasarkan pengguna
 
 module.exports = router;
