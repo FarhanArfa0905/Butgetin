@@ -190,7 +190,7 @@ To deploy the project:
 
 ---
 
-For more information, refer to our [Project Wiki](wiki-link).
+For more information, refer to our [Project Wiki](https://github.com/FarhanArfa0905/Butgetin).
 
 Feel free to report issues or contribute to the project by creating a pull request.
 
