@@ -23,11 +23,20 @@ Purpose-driven :
 
 
 # App Showcase
+![Rectangle](https://github.com/user-attachments/assets/958c7fdc-8ea9-4560-9967-2e201e8f3675)
+
+![395507772-e7f1b060-8757-4775-9357-6a59cb0b1541](https://github.com/user-attachments/assets/84e3f989-d762-4d9a-8072-78e7a3000030)
+
 ![Demo](https://github.com/user-attachments/assets/f747e48a-ef6f-44aa-b4a5-70f063b1c460)
 
-
-Demonstrasi
+## App Demo
 https://drive.google.com/file/d/1JMOImScyPpiH_butbk4MDcbMZzIto0aW/view?usp=sharing
+
+## Demonstrasi
+https://drive.google.com/file/d/1JMOImScyPpiH_butbk4MDcbMZzIto0aW/view?usp=sharing
+
+## Presentation Video
+https://youtu.be/ZK8X3CzGRdk
 
 # Learning Paths
 
