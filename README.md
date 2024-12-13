@@ -26,13 +26,13 @@ o	Dropout layer with a rate of 0.1.
 A dense layer that outputs a single value using a linear activation function.  
 
 Model Summary  
-![Butgetin App](https://www.dropbox.com/scl/fi/qjyinj4ql4vux7opiq6im/ModelSummary.png?rlkey=0qu8d8bo7kgfgdfhzhzcnycca&st=x3twghbf&dl=0)  
+![ModelSummary](https://github.com/user-attachments/assets/a9bf2754-8815-4930-90dc-03a0600d54c7)
 
 Model Plot Training  
-![Butgetin App](https://www.dropbox.com/scl/fi/s2dle1md46472j71xz4uf/PlotTraining.png?rlkey=px6v7h0dj4z0wwrsu1v58l6d5&st=kdo9e6j4&dl=0)  
+![PlotTraining](https://github.com/user-attachments/assets/a9ed7165-9e51-4c24-9bca-abcca89bc1e0)
 
 Model Suggest Budgeting  
-![Butgetin App](https://www.dropbox.com/scl/fi/psrewyy0jl2mk72a8kvcy/ModelSuggest.png?rlkey=5w7hg92ervaiae8fz4vd5qgf7&st=oolixzlw&dl=0)  
+![ModelSuggest](https://github.com/user-attachments/assets/3af86dd5-2950-40d5-bdba-433ef796d67a)
 
 
 ## How to use our projects
