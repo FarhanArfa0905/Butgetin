@@ -29,7 +29,7 @@ The app fosters financial literacy in children and teens through educational con
 
 The cloud architecture for Butgetin is designed to ensure scalability, security, and efficient resource management. Below is an overview of the architecture:
 
-<img src="https://github.com/FarhanArfa0905/Butgetin/blob/CloudComputing/WhatsApp%20Image%202024-12-12%20at%2019.59.33.jpeg?raw=true" width="1000">
+<img src="https://github.com/FarhanArfa0905/Butgetin/blob/CloudComputing/WhatsApp%20Image%202024-12-12%20at%2019.59.33.jpeg?raw=true" width="700">
 
 ### Key Components:
 
@@ -48,15 +48,15 @@ The cloud architecture for Butgetin is designed to ensure scalability, security,
    - Storing static assets and backups.
    - Providing durable and cost-effective solutions for file storage.
 
-4. **Cloud IAM**:
-
-   - Managing secure access to GCP resources.
-   - Implementing role-based permissions for enhanced security.
-
-5. **Google App Engine**:
+4. **Google App Engine**:
 
    - Deploying and managing the backend services with ease.
    - Providing scalability and support for dynamic workloads.
+
+4. **Google Cloud Build**:
+
+   - Automating the build and deployment process.
+   - Enabling continuous integration and delivery pipelines.
 
 ### Deployment with Google App Engine:
 Deploying the backend and machine learning services is simplified using Google App Engine:
@@ -85,21 +85,21 @@ Deploying the backend and machine learning services is simplified using Google A
 The architecture consists of:
 
 1. **Frontend:** Mobile app developed using Kotlin on Android Studio.
-2. **Backend:** Built with Node.js, providing APIs for user authentication, budget recommendations, and transaction management.
+2. **Backend:** Built with Node.js, providing APIs for user authentication, profile, transaction management and budget recommendations.
 3. **Machine Learning Model:** Deployed on Google Cloud Run, generating personalized budget suggestions.
 4. **Database:** MySQL hosted on Google Cloud SQL for secure and scalable storage.
 
 ## Technology Stack
 
 - **Frontend:** Kotlin, Android Studio
-- **Backend:** Node.js, Express
+- **Backend:** Node.js, Express.js
 - **Database:** MySQL (Google Cloud SQL)
-- **Machine Learning:** Python, TensorFlow, deployed on Google Cloud Run
+- **Machine Learning:** Python, TensorFlow, Flask, deployed on Google Cloud Run
 - **Cloud Services:**
   - Google Cloud Run
   - Google Cloud Storage
-  - Google Cloud IAM
   - Google App Engine
+  - Google Cloud Build
 
 ## APIs
 
