@@ -15,9 +15,10 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.butgetin.R
-import com.dicoding.butgetin.api.Article
+import com.dicoding.butgetin.data_class.Article
 import com.dicoding.butgetin.databinding.FragmentHomeBinding
 import com.dicoding.butgetin.ui.article.ArticleActivity
 import com.dicoding.butgetin.ui.article.DetailActivity
@@ -41,7 +42,19 @@ class HomeFragment : Fragment() {
         setupMenu()
         setupRecyclerView()
 
+        setupCardViewClicks()
+
         return root
+    }
+
+    private fun setupCardViewClicks() {
+        binding.cardView1?.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_incomeMonthlyReportFragment)
+        }
+
+        binding.cardView2?.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_expenseMonthlyReportFragment)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -106,17 +119,17 @@ class HomeFragment : Fragment() {
 
                 menu.findItem(R.id.action_article)?.icon?.setTint(
                     ContextCompat.getColor(
-                        requireContext(), R.color.white
+                        requireContext(), R.color.colorOnPrimary
                     )
                 )
                 menu.findItem(R.id.action_notification)?.icon?.setTint(
                     ContextCompat.getColor(
-                        requireContext(), R.color.white
+                        requireContext(), R.color.colorOnPrimary
                     )
                 )
                 menu.findItem(R.id.action_profile)?.icon?.setTint(
                     ContextCompat.getColor(
-                        requireContext(), R.color.white
+                        requireContext(), R.color.colorOnPrimary
                     )
                 )
             }

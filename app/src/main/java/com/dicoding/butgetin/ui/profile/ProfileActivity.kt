@@ -21,12 +21,15 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.butgetin.MainActivity
 import com.dicoding.butgetin.R
+import com.dicoding.butgetin.data.repository.UserRepository
 import com.dicoding.butgetin.databinding.ActivityProfileBinding
 import com.dicoding.butgetin.model.profile.ProfileMenu
 import com.dicoding.butgetin.ui.welcome.WelcomeActivity
@@ -38,8 +41,9 @@ class ProfileActivity : AppCompatActivity() {
         const val REMINDER_CHANNEL_ID = "reminder_channel"
         const val PERMISSION_REQUEST_CODE = 1
     }
-
     private lateinit var binding: ActivityProfileBinding
+    private lateinit var viewModel: ProfileViewModel
+    private lateinit var userProfileViewModel: UserProfileViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,10 +57,48 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        viewModel = ViewModelProvider(
+            this,
+            ProfileViewModelFactory(applicationContext)
+        ).get(ProfileViewModel::class.java)
+
+        val repository = UserRepository(applicationContext)
+        userProfileViewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(repository)
+        )[UserProfileViewModel::class.java]
+
+        val token = getSharedPreferences("user_preferences", MODE_PRIVATE)
+            .getString("token", "") ?: ""
+
+        if (token.isNotEmpty()) {
+            userProfileViewModel.fetchUserProfile(token)
+        }
+
+        observeUserProfile()
+
+        observeLogoutResponse()
+
         requestNotificationPermission()
+
         createNotificationChannel()
 
         setupProfileMenu()
+    }
+
+    private fun observeUserProfile() {
+        userProfileViewModel.userProfile.observe(this) { profile ->
+            profile?.let {
+                binding.textViewName.text = it.fullname
+                binding.textViewEmail.text = it.email
+            }
+        }
+
+        userProfileViewModel.errorMessage.observe(this) { errorMessage ->
+            errorMessage?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -100,12 +142,12 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun setupProfileMenu() {
         val menuList = listOf(
-            ProfileMenu(R.drawable.ic_account, getString(R.string.account)),
             ProfileMenu(
                 R.drawable.ic_linked_to_your_family_account,
                 getString(R.string.linked_to_your_family)
             ),
             ProfileMenu(R.drawable.ic_set_reminder, getString(R.string.set_reminder)),
+            ProfileMenu(R.drawable.ic_dark_mode, getString(R.string.dark_mode)),
             ProfileMenu(R.drawable.ic_language, getString(R.string.language)),
             ProfileMenu(R.drawable.ic_logout, getString(R.string.logout))
         )
@@ -113,13 +155,34 @@ class ProfileActivity : AppCompatActivity() {
         binding.rvProfileMenu.layoutManager = LinearLayoutManager(this)
         binding.rvProfileMenu.adapter = ProfileMenuAdapter(menuList) { menu ->
             when (menu.name) {
-                getString(R.string.account) -> showAccountDialog()
                 getString(R.string.linked_to_your_family) -> showFamilyDialog()
                 getString(R.string.set_reminder) -> showReminderDialog()
+                getString(R.string.dark_mode) -> showDarkModeDialog()
                 getString(R.string.language) -> navigateToLanguageSettings()
                 getString(R.string.logout) -> performLogout()
             }
         }
+    }
+
+    private fun showDarkModeDialog() {
+        val dialog = createDialog(R.layout.category_dark_mode)
+        val radioGroup = dialog.findViewById<RadioGroup>(R.id.radioGroup)
+        val okButton = dialog.findViewById<Button>(R.id.okButton)
+        val cancelButton = dialog.findViewById<Button>(R.id.cancelButton)
+
+        okButton.setOnClickListener {
+            val selectedId = radioGroup.checkedRadioButtonId
+            val selectedRadioButton = dialog.findViewById<RadioButton>(selectedId)
+            when (selectedRadioButton?.text.toString()) {
+                getString(R.string.system_mode) -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                getString(R.string.dark_mode) -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                getString(R.string.light_mode) -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+            dialog.dismiss()
+        }
+
+        cancelButton.setOnClickListener { dialog.dismiss() }
+        dialog.show()
     }
 
     private fun showReminderDialog() {
@@ -197,12 +260,6 @@ class ProfileActivity : AppCompatActivity() {
         )
     }
 
-    private fun showAccountDialog() = showCustomDialog(
-        R.drawable.account_illustarion,
-        getString(R.string.your_account_is_registered),
-        getString(R.string.continue_tracking_your_money_and_building_better_financial_habits)
-    )
-
     private fun showFamilyDialog() = showCustomDialog(
         R.drawable.ic_family_dialog,
         getString(R.string.linked_to_your_family),
@@ -210,13 +267,25 @@ class ProfileActivity : AppCompatActivity() {
     )
 
     private fun performLogout() {
+        val email = getSharedPreferences("user_preferences", MODE_PRIVATE)
+            .getString("email", "") ?: ""
+        val password = getSharedPreferences("user_preferences", MODE_PRIVATE)
+            .getString("password", "") ?: ""
+
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            viewModel.logout(email, password)
+        } else {
+            Toast.makeText(this, getString(R.string.logout_failed_missing_credentials), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun performLogoutWithDialog() {
         showCustomDialog(
             R.drawable.ic_logout_illustration,
-            getString(R.string.you_have_logged_out),
-            getString(R.string.hope_to_see_you_again_soon)
+            getString(R.string.confirm_logout_title),
+            getString(R.string.confirm_logout_description)
         ) {
-            startActivity(Intent(this, WelcomeActivity::class.java))
-            finish()
+            performLogout()
         }
     }
 
@@ -275,5 +344,25 @@ class ProfileActivity : AppCompatActivity() {
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.notify(1, notification)
         }
+    }
+
+    private fun observeLogoutResponse() {
+        viewModel.logoutResponse.observe(this) { response ->
+            if (response != null) {
+                Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
+                navigateToWelcomeScreen()
+            }
+        }
+
+        viewModel.error.observe(this) { errorMessage ->
+            if (errorMessage != null) {
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun navigateToWelcomeScreen() {
+        startActivity(Intent(this, WelcomeActivity::class.java))
+        finish()
     }
 }

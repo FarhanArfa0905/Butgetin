@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.butgetin.R
-import com.dicoding.butgetin.api.Article
+import com.dicoding.butgetin.data_class.Article
 
 class ListArticleAdapter(
     private val context: Context,

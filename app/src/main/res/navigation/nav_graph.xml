@@ -10,6 +10,15 @@
         android:name="com.dicoding.butgetin.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_tracking"
+            app:destination="@id/navigation_tracking" />
+        <action
+            android:id="@+id/action_navigation_home_to_expenseMonthlyReportFragment"
+            app:destination="@id/expenseMonthlyReportFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_incomeMonthlyReportFragment"
+            app:destination="@id/incomeMonthlyReportFragment" />
     </fragment>
 
     <fragment
@@ -23,6 +32,9 @@
         <action
             android:id="@+id/action_navigation_tracking_to_expenseTrackingFragment"
             app:destination="@id/expenseTrackingFragment" />
+        <action
+            android:id="@+id/action_navigation_tracking_to_navigation_home"
+            app:destination="@id/navigation_home" />
     </fragment>
 
     <fragment
@@ -36,6 +48,9 @@
         <action
             android:id="@+id/action_navigation_monthly_report_to_expenseMonthlyReportFragment"
             app:destination="@id/expenseMonthlyReportFragment" />
+        <action
+            android:id="@+id/action_navigation_monthly_report_to_navigation_home"
+            app:destination="@id/navigation_home" />
     </fragment>
     <fragment
         android:id="@+id/incomeTrackingFragment"
@@ -49,7 +64,7 @@
     <fragment
         android:id="@+id/expenseTrackingFragment"
         android:name="com.dicoding.butgetin.ui.tracking.part.ExpenseTrackingFragment"
-        android:label="fragment_expense_tracking"
+        android:label="@string/tracking_your_expense_here"
         tools:layout="@layout/fragment_expense_tracking" >
         <action
             android:id="@+id/action_expenseTrackingFragment_to_navigation_tracking"
@@ -58,7 +73,7 @@
     <fragment
         android:id="@+id/incomeMonthlyReportFragment"
         android:name="com.dicoding.butgetin.ui.monthlyreport.part.IncomeMonthlyReportFragment"
-        android:label="fragment_income_monthly_report"
+        android:label="@string/income_breakdown"
         tools:layout="@layout/fragment_income_monthly_report" >
         <action
             android:id="@+id/action_incomeMonthlyReportFragment_to_navigation_monthly_report"
@@ -67,7 +82,7 @@
     <fragment
         android:id="@+id/expenseMonthlyReportFragment"
         android:name="com.dicoding.butgetin.ui.monthlyreport.part.ExpenseMonthlyReportFragment"
-        android:label="fragment_expense_monthly_report"
+        android:label="@string/expense_s_breakdown"
         tools:layout="@layout/fragment_expense_monthly_report" >
         <action
             android:id="@+id/action_expenseMonthlyReportFragment_to_navigation_monthly_report"

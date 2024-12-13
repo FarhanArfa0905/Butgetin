@@ -21,7 +21,7 @@
     <string name="entertainment">Hiburan</string>
     <string name="others">Yang lain</string>
     <string name="log_in_failed">Gagal Masuk!</string>
-    <string name="food_and_drink">Makanan dan Minuman</string>
+    <string name="food_and_drink">Makanan &amp; Minuman</string>
     <string name="oops_no_articles_for_you_yet">Ups! Belum ada artikel buat kamu nih.</string>
     <string name="oops_no_notifications_for_you_yet">Ups! Belum ada notifikasi buat kamu nih.</string>
     <string name="come_on_start_tracking_your_money_now">Ayo, mulai lacak uang kamu sekarang!</string>
@@ -131,4 +131,20 @@
     <string name="illustration_transaction">Transaksi Ilustrasi</string>
     <string name="article_image">Gambar Artikel</string>
     <string name="image_icon">Ikon gambar</string>
+    <string name="dark_mode">Mode Gelap</string>
+    <string name="system_mode">Mode Sistem</string>
+    <string name="light_mode">Mode Terang</string>
+    <string name="arrow">Arah</string>
+    <string name="tracking_your_money_here">Dapatkan rincian pendapatan kamu di sini!</string>
+    <string name="getting_your_monthly_report_here">Dapatkan rincian pengeluaran kamu di sini!</string>
+    <string name="passwords_do_not_match">Kata sandi tidak cocok!</string>
+    <string name="please_fill_all_fields">Silakan isi semua kolom!</string>
+    <string name="confirm_logout_title">Apakah Anda yakin ingin logout?</string>
+    <string name="confirm_logout_description">Ya</string>
+    <string name="logout_failed_missing_credentials">Gagal keluar</string>
+    <string name="delete_transaction">Hapus transaksi</string>
+    <string name="edit_transaction">Edit transaksi</string>
+    <string name="expense_s_breakdown">Rincian Pengeluaran</string>
+    <string name="tracking_your_expense_here">Lacak pengeluaran kamu di sini!</string>
+    <string name="income_breakdown">Rincian Pendapatan</string>
 </resources>

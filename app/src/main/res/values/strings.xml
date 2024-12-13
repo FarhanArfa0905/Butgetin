@@ -18,7 +18,7 @@
     <string name="log_in_failed">Log In Failed!</string>
     <string name="transportation">Transportation</string>
     <string name="education">Education</string>
-    <string name="food_and_drink">Food and Drink</string>
+    <string name="food_and_drink">Food &amp; Drink</string>
     <string name="entertainment">Entertainment</string>
     <string name="others">Others</string>
     <string name="oops_no_articles_for_you_yet">Oops! No articles for you yet.</string>
@@ -130,6 +130,22 @@
     <string name="illustration_transaction">Illustration Transaction</string>
     <string name="article_image">Article Image</string>
     <string name="image_icon">Image icon</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="system_mode">System Mode</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="arrow">Arrow</string>
+    <string name="tracking_your_money_here">Getting your income breakdown here!</string>
+    <string name="getting_your_monthly_report_here">Getting your expense breakdown here!</string>
+    <string name="passwords_do_not_match">Password do not match!</string>
+    <string name="please_fill_all_fields">Please fill all fields!</string>
+    <string name="confirm_logout_title">Are you sure want to log out?</string>
+    <string name="confirm_logout_description">Yes</string>
+    <string name="logout_failed_missing_credentials">Log Out Failed</string>
+    <string name="delete_transaction">Delete transaction</string>
+    <string name="edit_transaction">Edit transaction</string>
+    <string name="expense_s_breakdown">Expense\'s Breakdown</string>
+    <string name="tracking_your_expense_here">Tracking your expense here!</string>
+    <string name="income_breakdown">Income Breakdown</string>
     <string-array name="data_name">
         <item>Yuk, Ajari Anak Menabung Sejak Dini</item>
         <item>Mengapa Literasi Keuangan Penting dan Cara Meningkatkannya</item>

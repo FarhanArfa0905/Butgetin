@@ -6,13 +6,18 @@ import android.content.res.ColorStateList
 import android.graphics.Paint
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.view.Window
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.butgetin.MainActivity
 import com.dicoding.butgetin.R
+import com.dicoding.butgetin.data.model.RegisterRequest
 import com.dicoding.butgetin.databinding.ActivitySignUpBinding
 import com.dicoding.butgetin.ui.login.LogInActivity
 
@@ -22,11 +27,16 @@ class SignUpActivity : AppCompatActivity() {
     private var isPasswordVisible = false
     private var isConfirmPasswordVisible = false
 
+    private val signUpViewModel: SignUpViewModel by viewModels {
+        SignUpViewModelFactory(applicationContext)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setupObservers()
 
         binding.tvLoginLink.setOnClickListener {
             binding.tvLoginLink.paintFlags =
@@ -37,31 +47,63 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.ivPasswordVisibility.setOnClickListener {
             isPasswordVisible = !isPasswordVisible
-            if (isPasswordVisible) {
-                binding.etPassword.inputType =
-                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                binding.ivPasswordVisibility.setImageResource(R.drawable.ic_visibility) // Ikon mata terbuka
-            } else {
-                binding.etPassword.inputType =
-                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-                binding.ivPasswordVisibility.setImageResource(R.drawable.ic_visibility_off) // Ikon mata tertutup
-            }
-            binding.etPassword.setSelection(binding.etPassword.text.length)
+            togglePasswordVisibility(
+                isPasswordVisible,
+                binding.etPassword,
+                binding.ivPasswordVisibility
+            )
         }
 
         binding.ivConfirmPasswordVisibility.setOnClickListener {
             isConfirmPasswordVisible = !isConfirmPasswordVisible
-            if (isConfirmPasswordVisible) {
-                binding.etConfirmPassword.inputType =
-                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                binding.ivConfirmPasswordVisibility.setImageResource(R.drawable.ic_visibility) // Ikon mata terbuka
-            } else {
-                binding.etConfirmPassword.inputType =
-                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-                binding.ivConfirmPasswordVisibility.setImageResource(R.drawable.ic_visibility_off) // Ikon mata tertutup
-            }
-            binding.etConfirmPassword.setSelection(binding.etConfirmPassword.text.length)
+            togglePasswordVisibility(
+                isConfirmPasswordVisible,
+                binding.etConfirmPassword,
+                binding.ivConfirmPasswordVisibility
+            )
         }
+
+        binding.btnSignUp.setOnClickListener {
+            val fullname = binding.etFullName.text.toString().trim()
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
+            val confirmPassword = binding.etConfirmPassword.text.toString().trim()
+
+            if (fullname.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                Toast.makeText(this, getString(R.string.please_fill_all_fields), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (password != confirmPassword) {
+                Log.e("SignUpActivity", "Passwords do not match: password=$password, confirmPassword=$confirmPassword")
+                Toast.makeText(this, getString(R.string.passwords_do_not_match), Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val request = RegisterRequest(fullname, email, password, confirmPassword)
+            signUpViewModel.registerUser(request)
+        }
+    }
+
+    private fun setupObservers() {
+        signUpViewModel.signUpResult.observe(this) { isSuccess ->
+            showSignUpDialog(isSuccess)
+        }
+
+        signUpViewModel.errorMessage.observe(this) { errorMessage ->
+            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun togglePasswordVisibility(isVisible: Boolean, editText: EditText, imageView: ImageView) {
+        if (isVisible) {
+            editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            imageView.setImageResource(R.drawable.ic_visibility)
+        } else {
+            editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            imageView.setImageResource(R.drawable.ic_visibility_off)
+        }
+        editText.setSelection(editText.text.length)
     }
 
     private fun showSignUpDialog(isSuccess: Boolean) {
@@ -69,7 +111,6 @@ class SignUpActivity : AppCompatActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_success)
         dialog.setCancelable(false)
-
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         val imageView = dialog.findViewById<ImageView>(R.id.imageView)
@@ -107,5 +148,4 @@ class SignUpActivity : AppCompatActivity() {
 
         dialog.show()
     }
-
 }

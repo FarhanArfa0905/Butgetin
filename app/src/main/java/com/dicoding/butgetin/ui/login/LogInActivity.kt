@@ -9,6 +9,8 @@ import android.view.Window
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.butgetin.MainActivity
 import com.dicoding.butgetin.R
@@ -18,6 +20,11 @@ import com.dicoding.butgetin.ui.signup.SignUpActivity
 class LogInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLogInBinding
+    private var isPasswordVisible = false
+
+    private val loginViewModel: LoginViewModel by viewModels {
+        LoginViewModelFactory(applicationContext)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,14 +32,23 @@ class LogInActivity : AppCompatActivity() {
         binding = ActivityLogInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupUI()
+        observeViewModel()
+    }
+
+    private fun setupUI() {
         binding.ivPasswordVisibility.setOnClickListener {
-            if (binding.etPassword.inputType == InputType.TYPE_TEXT_VARIATION_PASSWORD) {
-                binding.etPassword.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            isPasswordVisible = !isPasswordVisible
+            if (isPasswordVisible) {
+                binding.etPassword.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
                 binding.ivPasswordVisibility.setImageResource(R.drawable.ic_visibility)
             } else {
-                binding.etPassword.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+                binding.etPassword.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
                 binding.ivPasswordVisibility.setImageResource(R.drawable.ic_visibility_off)
             }
+            binding.etPassword.setSelection(binding.etPassword.text.length)
         }
 
         binding.btnSignup.setOnClickListener {
@@ -44,16 +60,26 @@ class LogInActivity : AppCompatActivity() {
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
 
-            if (validateLogin(email, password)) {
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                loginViewModel.loginUser(email, password)
+            } else {
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun observeViewModel() {
+        loginViewModel.loginResult.observe(this) { isSuccess ->
+            if (isSuccess) {
                 showCustomDialog(true)
             } else {
                 showCustomDialog(false)
             }
         }
-    }
 
-    private fun validateLogin(email: String, password: String): Boolean {
-        return email == "user@example.com" && password == "password123"
+        loginViewModel.errorMessage.observe(this) { message ->
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun showCustomDialog(isSuccess: Boolean) {
@@ -61,7 +87,6 @@ class LogInActivity : AppCompatActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_success)
         dialog.setCancelable(false)
-
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         val imageView = dialog.findViewById<ImageView>(R.id.imageView)

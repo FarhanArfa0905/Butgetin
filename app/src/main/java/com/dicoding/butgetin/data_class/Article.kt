@@ -1,4 +1,4 @@
-package com.dicoding.butgetin.api
+package com.dicoding.butgetin.data_class
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

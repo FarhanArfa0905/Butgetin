@@ -7,6 +7,8 @@
     android:paddingBottom="56dp"
     android:fitsSystemWindows="true"
     android:paddingTop="0dp"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     tools:context=".ui.home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,7 +45,6 @@
                         android:layout_width="400dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="8dp"
-                        android:clipToOutline="true"
                         android:contentDescription="@string/welcome_illustration"
                         android:scaleType="centerCrop"
                         android:src="@drawable/welcome_illustration1" />
@@ -53,7 +54,6 @@
                         android:layout_width="400dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="8dp"
-                        android:clipToOutline="true"
                         android:contentDescription="@string/welcome_illustration"
                         android:scaleType="centerCrop"
                         android:src="@drawable/welcome_illustration2" />
@@ -63,7 +63,6 @@
                         android:layout_width="400dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="8dp"
-                        android:clipToOutline="true"
                         android:contentDescription="@string/welcome_illustration"
                         android:scaleType="centerCrop"
                         android:src="@drawable/welcome_illustration3" />
@@ -71,31 +70,132 @@
             </HorizontalScrollView>
         </FrameLayout>
 
+        <LinearLayout
+            android:id="@+id/featureLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frameLayoutHome">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="#deecd8"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@color/green_fix"
+                app:cardElevation="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/green_fix"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tv_tracking_your_money"
+                        android:layout_width="150dp"
+                        android:layout_height="82dp"
+                        android:text="@string/tracking_your_money_here"
+                        android:textSize="16sp"
+                        android:textColor="@color/black_fix"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/arrow1"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_arrow_right"
+                        android:contentDescription="@string/arrow"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:backgroundTint="#deecd8"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                app:cardBackgroundColor="@color/green_fix"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/green_fix"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tv_getting_your_monthly_report"
+                        android:layout_width="153dp"
+                        android:layout_height="80dp"
+                        android:text="@string/getting_your_monthly_report_here"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_fix"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="TextSizeCheck" />
+
+                    <ImageView
+                        android:id="@+id/arrow2"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_arrow_right"
+                        android:contentDescription="@string/arrow"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="24dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/come_on_improve_your_financial_literacy"
             android:textColor="@color/lighter_grey"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frameLayoutHome" />
+            app:layout_constraintTop_toBottomOf="@+id/featureLayout"
+            tools:ignore="TextSizeCheck" />
 
         <TextView
             android:id="@+id/seeAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/see_all"
-            android:textColor="@color/lighter_grey"
+            android:textColor="#757575"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
-            tools:ignore="TextContrastCheck" />
+            app:layout_constraintTop_toBottomOf="@+id/featureLayout" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvArticles"

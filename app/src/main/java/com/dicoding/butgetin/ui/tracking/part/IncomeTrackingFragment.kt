@@ -2,6 +2,7 @@ package com.dicoding.butgetin.ui.tracking.part
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -17,14 +18,20 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.dicoding.butgetin.R
-import com.dicoding.butgetin.api.Transaction
+import com.dicoding.butgetin.data.api.RetrofitClient
+import com.dicoding.butgetin.data.model.TransactionRequest
 import com.dicoding.butgetin.ui.tracking.TransactionViewModel
+import com.dicoding.butgetin.ui.tracking.TransactionViewModelFactory
 import java.text.DecimalFormat
 import java.util.Calendar
+import java.util.Locale
 
 class IncomeTrackingFragment : Fragment() {
 
     private val decimalFormat = DecimalFormat("#,###")
+    private val transactionViewModel: TransactionViewModel by activityViewModels {
+        TransactionViewModelFactory(RetrofitClient.instance)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -40,7 +47,7 @@ class IncomeTrackingFragment : Fragment() {
                 if (isFormatting) return
 
                 isFormatting = true
-                val originalText = s.toString().replace(",", "") // Remove existing commas
+                val originalText = s.toString().replace(",", "")
                 try {
                     val formattedText = decimalFormat.format(originalText.toDouble())
                     etAmount.setText(formattedText)
@@ -122,11 +129,32 @@ class IncomeTrackingFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            val isExpense = false
-            val transaction = Transaction(date, category, amount, isExpense)
+            val inputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val formattedDate = try {
+                val dateObj = inputFormat.parse(date) // Parse input date (DD/MM/YYYY)
+                outputFormat.format(dateObj) // Format to desired output (YYYY-MM-DD)
+            } catch (e: Exception) {
+                // Handle the error if parsing fails
+                Toast.makeText(requireContext(),
+                    "Invalid date format", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-            val viewModel: TransactionViewModel by activityViewModels()
-            viewModel.addTransaction(transaction)
+            val familyId = "yourFamilyIdHere" // Provide the familyId (You may need to pass this dynamically)
+            val type = "income" // Set the type to "income"
+
+            val transactionRequest = TransactionRequest(
+                userId = 1, // Provide the userId (You may need to pass this dynamically)
+                date = formattedDate,
+                category = category,
+                amount = amount,
+                familyId = 1,
+                type = type
+            )
+
+            // Add transaction using ViewModel
+            transactionViewModel.addTransaction(transactionRequest)
 
             Toast.makeText(requireContext(),
                 getString(R.string.transaction_added), Toast.LENGTH_SHORT)

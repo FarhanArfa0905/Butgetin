@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dicoding.butgetin.R
-import com.dicoding.butgetin.api.Article
+import com.dicoding.butgetin.data_class.Article
 import com.dicoding.butgetin.databinding.ActivityArticleBinding
 
 class ArticleActivity : AppCompatActivity() {

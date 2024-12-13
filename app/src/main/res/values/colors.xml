@@ -23,5 +23,10 @@
     <color name="dark_blue">#3e78bc</color>
     <color name="text_color">#000000</color>
     <color name="darker_grey">#3C3C3C</color>
-    <color name="lighter_grey">#7A7A7A</color>
+    <color name="lighter_grey">#000000</color>
+    <color name="black_fix">#000000</color>
+    <color name="green_fix">#deecd8</color>
+    <color name="text_primary">#000000</color>
+    <color name="cardBackground">#FFFFFF</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
 </resources>

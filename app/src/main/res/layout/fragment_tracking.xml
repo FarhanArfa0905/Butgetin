@@ -11,9 +11,19 @@
         android:id="@+id/rvTransactions"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,8 +33,8 @@
         android:layout_width="224dp"
         android:layout_height="224dp"
         android:layout_marginBottom="128dp"
-        android:src="@drawable/illustration_transaction"
         android:contentDescription="@string/illustration_transaction"
+        android:src="@drawable/illustration_transaction"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,14 +45,13 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
         android:text="@string/come_on_start_tracking_your_money_now"
         android:textColor="@color/text_color"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/illustrationTransaction"
-        app:layout_constraintEnd_toEndOf="@+id/illustrationTransaction"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/illustrationTransaction"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toBottomOf="@+id/illustrationTransaction" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add"

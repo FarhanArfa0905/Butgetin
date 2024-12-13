@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.text.util.Linkify
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.butgetin.R
-import com.dicoding.butgetin.api.Article
+import com.dicoding.butgetin.data_class.Article
 import com.dicoding.butgetin.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
