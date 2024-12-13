@@ -47,7 +47,8 @@ This API has been deployed using google cloud (Cloud Run) u can access it here:
 If u want to run it locally u need to:
 
 - Clone this repository `https://github.com/FarhanArfa0905/Butgetin.git`
+- On the left bottom, change the branch `main` to `Machine-Learning`
 - Open terminal and create virtual environment using `python -m venv venv`
 - Install all requirement with `pip install -r requirements.txt`
-- Run `python api.py` in terminal to run flask
+- Run `python app.py` in terminal to run flask
 - use url `http://127.0.0.1/` to access all api endpoint
