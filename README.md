@@ -1,10 +1,10 @@
 ## <img src="https://raw.githubusercontent.com/FarhanArfa0905/Butgetin/115ed12cca367f71c6dc17463265f91c50395c35/Group%2072.png" alt="Gambar" width="50">   Butgetin
 
-Butgetin is application expense tracker that .........
+Butgetin is application expense tracker that created ButgetIn to address the critical need for budgeting skills among young people. With personal finance becoming more complex, families often struggle to teach effective budgeting, leading youth to develop unhealthy spending habits that may cause future financial stress. ButgetIn is a practical tool that not only tracks expenses but emphasizes budgeting’s importance. By fostering collaborative budgeting, the app aims to build essential financial skills for youth, empowering them with healthy money habits and providing parents with a way to guide spending a key step toward effective, family-focused financial education.
 
 Purpose-driven :
 
-•	Users want to manage their expense and avoid doing overspending
+•	Users want to manage their expense and avoid doing overspending  
 •	Provides budgeting recommendations for each category to individual by history transactions.
 
 <div align="center">
@@ -23,9 +23,11 @@ Purpose-driven :
 
 
 # App Showcase
+![Demo](https://github.com/user-attachments/assets/f747e48a-ef6f-44aa-b4a5-70f063b1c460)
+
 
 Demonstrasi
-
+https://drive.google.com/file/d/1JMOImScyPpiH_butbk4MDcbMZzIto0aW/view?usp=sharing
 
 # Learning Paths
 
