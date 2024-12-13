@@ -32,9 +32,6 @@ Purpose-driven :
 ## App Demo
 https://drive.google.com/file/d/1JMOImScyPpiH_butbk4MDcbMZzIto0aW/view?usp=sharing
 
-## Youtube Link
-[https://drive.google.com/file/d/1JMOImScyPpiH_butbk4MDcbMZzIto0aW/view?usp=sharing](https://youtu.be/ZK8X3CzGRdk)
-
 ## Presentation Video
 https://youtu.be/ZK8X3CzGRdk
 
